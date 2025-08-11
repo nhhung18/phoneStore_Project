@@ -32,10 +32,11 @@ create table product(
 create table supplieres_product(
 	suppliers_id tinyint unsigned not null,
     product_id tinyint unsigned not null,
+    PRIMARY KEY (suppliers_id, product_id),
     foreign key (suppliers_id) references supplieres(id),
     foreign key (product_id) references product(id)
 );
-
+-- drop table supplieres_product
 create table `order`(
 	id tinyint unsigned auto_increment primary key,
     customer_id tinyint unsigned not null, 
@@ -137,6 +138,9 @@ INSERT INTO order_detail (order_id, product_id, quantity) VALUES
 (9, 5, 2),
 (10, 2, 1),
 (10, 1, 1);
+
+use phone_store;
+select * from supplieres_product
 
 -- update ORDER_DETAIL
 -- SET QUANTITY = 2 WHERE ID = 5;

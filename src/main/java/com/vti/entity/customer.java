@@ -5,6 +5,7 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "customer", catalog = "phone_store")
@@ -14,7 +15,7 @@ public class customer implements Serializable {
     @Column(name = "Id")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private short id;
+    private short customerId;
 
     @Column(name = "Email", length = 50, nullable = false, unique = true, updatable = false)
     private String email;
@@ -36,16 +37,20 @@ public class customer implements Serializable {
     @CreationTimestamp
     private Date createDate;
 
+    @OneToMany(mappedBy = "customerId")
+    List<order> orders;
+
+
     public customer() {
         super();
     }
 
     public short getId() {
-        return id;
+        return customerId;
     }
 
     public void setId(short id) {
-        this.id = id;
+        this.customerId = id;
     }
 
     public String getEmail() {

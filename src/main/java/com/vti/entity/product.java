@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.List;
+
 @Entity
 @Table(name = "product", catalog = "phone_store")
 public class product implements Serializable {
@@ -31,6 +33,9 @@ public class product implements Serializable {
     @Column(name = "color")
     @Enumerated(EnumType.STRING)
     private color color;
+
+    @OneToMany(mappedBy = "product")
+    List<orderDetail> ordersDetails;
 
 
     public product() {

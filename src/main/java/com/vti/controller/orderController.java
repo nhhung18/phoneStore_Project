@@ -1,9 +1,11 @@
 package com.vti.controller;
 
-import com.vti.dto.supProDto;
-import com.vti.entity.supPro;
-import com.vti.entity.supProID;
-import com.vti.service.ISupProService;
+import com.vti.dto.orderDto;
+import com.vti.dto.productDto;
+import com.vti.entity.order;
+import com.vti.entity.product;
+import com.vti.service.IProductService;
+import com.vti.service.IorderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,22 +18,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("supplierProduct")
+@RequestMapping("order")
 @CrossOrigin("*")
-public class supProController {
+public class orderController {
     @Autowired
-    private ISupProService supProService;
+    private IorderService orderService;
 
     @GetMapping()
-    public ResponseEntity<?> getSupPro() {
-        List<supPro> entities = supProService.getSupPro();
-        List<supProDto> dtos = new ArrayList<>();
+    public ResponseEntity<?> getAllProduct(){
+        List<order> entities = orderService.getAllOrder();
+        List<orderDto> dtos = new ArrayList<>();
 
-        for (supPro sP: entities) {
-            supProDto dto = new supProDto(sP.getSupplier(), sP.getProduct());
+        for(order od : entities){
+            orderDto dto = new orderDto(od.getOrderId(), od.getCustomerId(), od.getCreateDate(), od.getPayingStatus(), od.getShipStatus());
             dtos.add(dto);
         }
         return new ResponseEntity<>(dtos, HttpStatus.OK);
     }
-
 }
