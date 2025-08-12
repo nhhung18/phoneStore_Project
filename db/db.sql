@@ -139,30 +139,32 @@ INSERT INTO order_detail (order_id, product_id, quantity) VALUES
 (10, 2, 1),
 (10, 1, 1);
 
+drop table order_detail
+
 use phone_store;
-select * from supplieres_product
+select * from product
+select * from `order`
+select * from `order_detail` 
+show triggers
 
--- update ORDER_DETAIL
--- SET QUANTITY = 2 WHERE ID = 5;
+UPDATE order_detail AS odd
+JOIN `order` AS od 
+    ON od.id = odd.order_id
+SET odd.total_price = CASE 
+                   WHEN od.paying_status = 'failed' THEN NULL
+                   ELSE odd.price
+                END;
 
--- SELECT * FROM ORDER_DETAIL;
 
--- SHOW TRIGGERS;
+                
+                
+UPDATE `order`
+SET price = CASE 
+                    WHEN paying_status = 'failed' THEN NULL 
+                    ELSE ship_status 
+                 END;
+                 
 
--- DROP TABLE ORDER_DETAIL
-
-
--- DROP TABLE ORDER_DETAIL
-
--- SHOW TRIGGERS
-
--- SELECT * FROM order_detail
-
--- update order_detail
--- set quantity = 2 
--- where id = 4 
-
-drop database phone_store
 
 
 

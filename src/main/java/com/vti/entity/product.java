@@ -76,7 +76,7 @@ public class product implements Serializable {
     }
 
     public com.vti.entity.capacity getCapacity() {
-        return capacity;
+        return this.capacity;
     }
 
     public void setCapacity(com.vti.entity.capacity capacity) {
@@ -84,7 +84,7 @@ public class product implements Serializable {
     }
 
     public com.vti.entity.color getColor() {
-        return color;
+        return this.color;
     }
 
     public void setColor(com.vti.entity.color color) {
