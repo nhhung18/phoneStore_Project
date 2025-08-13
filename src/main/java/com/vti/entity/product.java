@@ -2,6 +2,7 @@ package com.vti.entity;
 
 
 import jakarta.persistence.*;
+import jakarta.persistence.criteria.CriteriaBuilder;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -17,14 +18,14 @@ public class product implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private short productId;
 
-    @Column(name = "`name`", length = 50, nullable = false, unique = true, updatable = false)
+    @Column(name = "`name`", length = 50, nullable = false, unique = true)
     private String name;
 
     @Column(name = "price", precision = 10, scale = 2)
     private BigDecimal price;
 
     @Column(name = "stock_quantity", columnDefinition = "INT UNSIGNED")
-    private int stockQuantity;
+    private Integer stockQuantity;
 
     @Column(name = "capacity")
     @Enumerated(EnumType.STRING)

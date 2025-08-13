@@ -1,11 +1,8 @@
 package com.vti.form;
 
-
-import jakarta.persistence.criteria.CriteriaBuilder;
-
 import java.math.BigDecimal;
 
-public class updateProductForm {
+public class createProductForm {
     private String name;
     private BigDecimal price;
     private Integer stock_quantity;
@@ -13,7 +10,7 @@ public class updateProductForm {
     private com.vti.entity.color color;
 
 
-    public updateProductForm() {
+    public createProductForm() {
         super();
     }
 
@@ -57,3 +54,5 @@ public class updateProductForm {
         this.color = color;
     }
 }
+
+
