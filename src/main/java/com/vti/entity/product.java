@@ -16,7 +16,7 @@ public class product implements Serializable {
     @Column(name = "id")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private short productId;
+    private short product_id;
 
     @Column(name = "`name`", length = 50, nullable = false, unique = true)
     private String name;
@@ -35,7 +35,7 @@ public class product implements Serializable {
     @Enumerated(EnumType.STRING)
     private color color;
 
-    @OneToMany(mappedBy = "product")
+    @OneToMany(mappedBy = "product_id")
     List<orderDetail> ordersDetails;
 
 
@@ -45,11 +45,11 @@ public class product implements Serializable {
 
 
     public short getId() {
-        return productId;
+        return product_id;
     }
 
     public void setId(short id) {
-        this.productId = id;
+        this.product_id = id;
     }
 
     public String getName() {

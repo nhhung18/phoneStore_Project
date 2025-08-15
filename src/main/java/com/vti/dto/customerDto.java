@@ -11,6 +11,10 @@ public class customerDto {
     private int phoneNum;
     private Date createDate;
 
+    public customerDto() {
+        super();
+    }
+
     public customerDto(short id, String email, String username, String fullname, String address, int phoneNum, Date createDate) {
         this.id = id;
         this.email = email;

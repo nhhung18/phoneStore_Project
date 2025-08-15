@@ -1,5 +1,6 @@
 package com.vti.dto;
 
+import com.vti.entity.customer;
 import com.vti.entity.order;
 import com.vti.entity.product;
 
@@ -7,15 +8,18 @@ import java.math.BigDecimal;
 
 public class orderDetailDto {
     private short id;
-    private order orderId;
+    private order order_id;
     private product product_id;
     private short quantity;
     private BigDecimal price;
     private BigDecimal total_price;
 
-    public orderDetailDto(short id, order orderId, product product_id, short quantity, BigDecimal price, BigDecimal total_price) {
+    public orderDetailDto() {
+    }
+
+    public orderDetailDto(short id, order order_id, product product_id, short quantity, BigDecimal price, BigDecimal total_price) {
         this.id = id;
-        this.orderId = orderId;
+        this.order_id = order_id;
         this.product_id = product_id;
         this.quantity = quantity;
         this.price = price;
@@ -30,12 +34,12 @@ public class orderDetailDto {
         this.id = id;
     }
 
-    public order getOrderId() {
-        return orderId;
+    public order getOrder_id() {
+        return order_id;
     }
 
-    public void setOrderId(order orderId) {
-        this.orderId = orderId;
+    public void setOrder_id(order orderId) {
+        this.order_id = orderId;
     }
 
     public product getProduct_id() {

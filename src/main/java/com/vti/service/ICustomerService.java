@@ -1,6 +1,12 @@
 package com.vti.service;
 
+import com.vti.dto.customerDto;
 import com.vti.entity.customer;
+import com.vti.form.createCustomerForm;
+import com.vti.form.updateCustomerForm;
+import com.vti.form.updateProductForm;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
@@ -11,5 +17,13 @@ import java.util.List;
 // ==> Ngắn gọn: Định nghĩa ra các hàm và class nào implements nó thì
 // phải triển khai hàm ra
 public interface ICustomerService {
-    List<customer> getAllCustomer();
+    Page<customerDto> getAllCustomer(Pageable pageable);
+
+    customerDto getCustomerById(short id);
+
+    void deleteCustomerById(short id);
+
+    void updateCustomerById(short id, updateCustomerForm form) throws Exception;
+
+    void createCustomer(createCustomerForm form) throws Exception;
 }

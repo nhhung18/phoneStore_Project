@@ -22,8 +22,8 @@ public class supplier implements Serializable {
     @Column(name = "name", length = 50, nullable = false, unique = true, updatable = false)
     private String name;
 
-    @Column(name = "Address", length = 100, nullable = false)
-    private String andress;
+    @Column(name = "address", length = 100, nullable = false)
+    private String address;
 
     @Column(name = "phone_num", nullable = false, unique = true)
     private int phoneNum;
@@ -53,14 +53,6 @@ public class supplier implements Serializable {
         this.email = email;
     }
 
-    public String getUsername() {
-        return name;
-    }
-
-    public void setUsername(String username) {
-        this.name = username;
-    }
-
     public String getName() {
         return name;
     }
@@ -69,12 +61,12 @@ public class supplier implements Serializable {
         this.name = name;
     }
 
-    public String getAndress() {
-        return andress;
+    public String getAddress() {
+        return address;
     }
 
-    public void setAndress(String andress) {
-        this.andress = andress;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public int getPhoneNum() {

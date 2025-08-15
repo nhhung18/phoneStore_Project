@@ -15,7 +15,7 @@ public class customer implements Serializable {
     @Column(name = "Id")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private short customerId;
+    private short customer_id;
 
     @Column(name = "Email", length = 50, nullable = false, unique = true, updatable = false)
     private String email;
@@ -27,17 +27,17 @@ public class customer implements Serializable {
     private String fullname;
 
     @Column(name = "Address", length = 100, nullable = false)
-    private String andress;
+    private String address;
 
     @Column(name = "phone_num", nullable = false, unique = true)
-    private int phoneNum;
+    private Integer phoneNum;
 
     @Column(name = "CreateDate")
     @Temporal(TemporalType.TIMESTAMP)
     @CreationTimestamp
     private Date createDate;
 
-    @OneToMany(mappedBy = "customerId")
+    @OneToMany(mappedBy = "customer_id")
     List<order> orders;
 
 
@@ -46,11 +46,11 @@ public class customer implements Serializable {
     }
 
     public short getId() {
-        return customerId;
+        return customer_id;
     }
 
     public void setId(short id) {
-        this.customerId = id;
+        this.customer_id = id;
     }
 
     public String getEmail() {
@@ -77,19 +77,19 @@ public class customer implements Serializable {
         this.fullname = fullname;
     }
 
-    public String getAndress() {
-        return andress;
+    public String getAddress() {
+        return address;
     }
 
-    public void setAndress(String andress) {
-        this.andress = andress;
+    public void setAddress(String andress) {
+        this.address = andress;
     }
 
-    public int getPhone_num() {
+    public Integer getPhone_num() {
         return phoneNum;
     }
 
-    public void setPhone_num(int phone_num) {
+    public void setPhone_num(Integer phone_num) {
         this.phoneNum = phone_num;
     }
 

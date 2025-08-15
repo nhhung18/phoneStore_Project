@@ -12,6 +12,10 @@ public class supProDto {
         this.product_id = product_id;
     }
 
+    public supProDto() {
+        super();
+    }
+
     public supplier getSuppliers_id() {
         return suppliers_id;
     }

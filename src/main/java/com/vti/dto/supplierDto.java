@@ -35,6 +35,9 @@ public class supplierDto {
         this.email = email;
     }
 
+    public supplierDto() {
+        super();
+    }
 
     public String getName() {
         return name;

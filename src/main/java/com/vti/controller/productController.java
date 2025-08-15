@@ -28,29 +28,12 @@ public class productController {
 
     @GetMapping()
     public ResponseEntity<?> getAllProduct(Pageable pageable) {
-//        Page<product> entities = productService.getAllProduct(pageable);
-        Page<product> entities =  productService.getAllProduct(pageable);
-        Page<productDto> dtoPage = entities.map(new Function<product, productDto>(){
-            @Override
-            public productDto apply(product product){
-
-                productDto dto = new productDto(product.getId(), product.getName(),product.getPrice(), product.getStockQuantity(), product.getCapacity(), product.getColor());
-                return dto;
-            }
-        });
-
-        return new ResponseEntity<>(dtoPage, HttpStatus.OK);
+        return new ResponseEntity<>(productService.getAllProduct(pageable), HttpStatus.OK);
     }
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<?> getProductById(@PathVariable(name = "id") short id) {
-//        if(id < 1){
-//            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(false);
-//        }
-        product product = productService.getProductById(id);
-        productDto dto = new productDto(product.getId(), product.getName(), product.getPrice(), product.getStockQuantity(), product.getCapacity(), product.getColor());
-
-        return new ResponseEntity<productDto>(dto, HttpStatus.OK);
+        return new ResponseEntity<>(productService.getProductById(id), HttpStatus.OK);
     }
 
 
@@ -62,16 +45,15 @@ public class productController {
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<?> updateProductById(@PathVariable(name = "id") short id, @RequestBody updateProductForm form){
+    public ResponseEntity<?> updateProductById(@PathVariable(name = "id") short id, @RequestBody updateProductForm form)throws Exception{
         productService.updateProductById(id, form);
 
         return new ResponseEntity<String>("Cap nhat thanh cong", HttpStatus.OK);
     }
 
     @PostMapping()
-    public ResponseEntity<?> createProductById(@RequestBody createProductForm form){
-        productService.createProductById(form);
-
+    public ResponseEntity<?> createProduct(@RequestBody createProductForm form) throws Exception{
+        productService.createProduct(form);
         return new ResponseEntity<String>("Tao san pham thanh cong", HttpStatus.OK);
     }
 }

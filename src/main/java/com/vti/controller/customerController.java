@@ -3,14 +3,17 @@ package com.vti.controller;
 import com.vti.dto.customerDto;
 import com.vti.dto.productDto;
 import com.vti.entity.customer;
+import com.vti.form.createCustomerForm;
+import com.vti.form.createProductForm;
+import com.vti.form.updateCustomerForm;
+import com.vti.form.updateProductForm;
 import com.vti.service.ICustomerService;
+import com.vti.service.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,15 +27,33 @@ public class customerController {
     private ICustomerService customerService;
 
     @GetMapping()
-    public ResponseEntity<?> getAllCustomer() {
-        List<customer> entities = customerService.getAllCustomer();
-        List<customerDto> dtos = new ArrayList<>();
+    public ResponseEntity<?> getAllCustomer(Pageable pageable) {
+        return new ResponseEntity<>(customerService.getAllCustomer(pageable), HttpStatus.OK);
+    }
 
-        for (customer cus : entities) {
-            customerDto dto = new customerDto(cus.getId(), cus.getEmail(), cus.getUsername(), cus.getFullname(), cus.getAndress(), cus.getPhone_num(), cus.getCreateDate());
-            dtos.add(dto);
-        }
-        return new ResponseEntity<>(dtos, HttpStatus.OK);
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<?> getCustomerById(@PathVariable(name = "id") short id) {
+        return new ResponseEntity<>(customerService.getCustomerById(id), HttpStatus.OK);
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<?> deleteCustomerById(@PathVariable(name = "id") short id) {
+        customerService.deleteCustomerById(id);
+
+        return new ResponseEntity<String>("Xoa thanh cong", HttpStatus.OK);
+    }
+
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<?> updateProductById(@PathVariable(name = "id") short id, @RequestBody updateCustomerForm form) throws Exception{
+        customerService.updateCustomerById(id, form);
+
+        return new ResponseEntity<String>("Cap nhat thanh cong", HttpStatus.OK);
+    }
+
+    @PostMapping()
+    public ResponseEntity<?> createCustomerById(@RequestBody createCustomerForm form) throws Exception{
+        customerService.createCustomer(form);
+        return new ResponseEntity<String>("Tao khach hang thanh cong", HttpStatus.OK);
     }
 
 }

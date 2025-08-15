@@ -13,6 +13,9 @@ public class productDto {
     private capacity capacity;
     private color color;
 
+    public productDto() {
+        super();
+    }
 
     public productDto(short id, String name, BigDecimal price, int stock_quantity, com.vti.entity.capacity capacity, com.vti.entity.color color) {
         this.id = id;

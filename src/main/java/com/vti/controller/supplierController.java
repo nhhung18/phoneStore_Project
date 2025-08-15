@@ -4,15 +4,17 @@ import com.vti.dto.customerDto;
 import com.vti.dto.supplierDto;
 import com.vti.entity.customer;
 import com.vti.entity.supplier;
+import com.vti.form.createCustomerForm;
+import com.vti.form.createSupplierForm;
+import com.vti.form.updateCustomerForm;
+import com.vti.form.updateSupplierForm;
 import com.vti.service.ICustomerService;
 import com.vti.service.ISupplierService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,15 +28,33 @@ public class supplierController {
     private ISupplierService supplierService;
 
     @GetMapping()
-    public ResponseEntity<?> getAllCustomer() {
-        List<supplier> entities = supplierService.getAllCustomer();
-        List<supplierDto> dtos = new ArrayList<>();
+    public ResponseEntity<?> getAllSupplier(Pageable pageable) {
+        return new ResponseEntity<>(supplierService.getAllSupplier(pageable), HttpStatus.OK);
+    }
 
-        for (supplier sup : entities) {
-            supplierDto dto = new supplierDto(sup.getId(),sup.getEmail(), sup.getName(), sup.getAndress(), sup.getPhoneNum(), sup.getCreateDate());
-            dtos.add(dto);
-        }
-        return new ResponseEntity<>(dtos, HttpStatus.OK);
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<?> getSupplierById(@PathVariable(name = "id") short id) {
+        return new ResponseEntity<>(supplierService.getSupplierById(id), HttpStatus.OK);
+    }
+
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<?> deleteSupplierById(@PathVariable(name = "id") short id) {
+        supplierService.deleteSupplierById(id);
+        return new ResponseEntity<String>("Xoa thanh cong", HttpStatus.OK);
+    }
+
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<?> updateSupplierById(@PathVariable(name = "id") short id, @RequestBody updateSupplierForm form) throws Exception{
+        supplierService.updateSupplierById(id, form);
+
+        return new ResponseEntity<String>("Cap nhat thanh cong", HttpStatus.OK);
+    }
+
+    @PostMapping()
+    public ResponseEntity<?> createCustomerById(@RequestBody createSupplierForm form) throws Exception{
+        supplierService.createSupplier(form);
+        return new ResponseEntity<String>("Tao nha cung cap thanh cong", HttpStatus.OK);
     }
 
 }

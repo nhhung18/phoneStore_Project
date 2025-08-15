@@ -17,11 +17,11 @@ public class orderDetail implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "order_id", nullable = false)
-    private order order;
+    private order order_id;
 
     @ManyToOne
     @JoinColumn(name = "product_id", nullable = false)
-    private product product;
+    private product product_id;
 
     @Column(name = "quantity")
     private short quantity;
@@ -44,20 +44,20 @@ public class orderDetail implements Serializable {
         this.orderDetailId = orderDetailId;
     }
 
-    public com.vti.entity.order getOrder() {
-        return order;
+    public com.vti.entity.order getOrder_id() {
+        return order_id;
     }
 
-    public void setOrder(com.vti.entity.order order) {
-        this.order = order;
+    public void setOrder_id(com.vti.entity.order order_id) {
+        this.order_id = order_id;
     }
 
-    public com.vti.entity.product getProduct() {
-        return product;
+    public com.vti.entity.product getProduct_id() {
+        return product_id;
     }
 
-    public void setProduct(com.vti.entity.product product) {
-        this.product = product;
+    public void setProduct_id(com.vti.entity.product product) {
+        this.product_id = product;
     }
 
     public short getQuantity() {
@@ -76,11 +76,11 @@ public class orderDetail implements Serializable {
         this.price = price;
     }
 
-    public BigDecimal getTotalPrice() {
+    public BigDecimal getTotal_price() {
         return totalPrice;
     }
 
-    public void setTotalPrice(BigDecimal totalPrice) {
+    public void setTotal_price(BigDecimal totalPrice) {
         this.totalPrice = totalPrice;
     }
 }

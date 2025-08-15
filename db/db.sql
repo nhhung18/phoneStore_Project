@@ -10,6 +10,8 @@ create table customer(
     phone_num int not null unique key,
     CreateDate datetime default now()
 );
+ALTER TABLE customer
+ADD `password` varchar(100) not null;
 
 create table supplieres(
 	id tinyint unsigned auto_increment primary key,
@@ -79,6 +81,29 @@ END$$
 
 DELIMITER ;
 
+
+DELIMITER $$
+CREATE TRIGGER trg_update_order_detail_values
+BEFORE UPDATE ON order_detail
+FOR EACH ROW
+BEGIN
+    DECLARE product_price DECIMAL(10, 2);
+
+    -- Lấy giá từ bảng product
+    SELECT price INTO product_price 
+    FROM product
+    WHERE id = NEW.product_id;
+
+    -- Gán vào NEW.price
+    SET NEW.price = product_price;
+
+    -- Tính total_price
+    SET NEW.total_price = NEW.price * NEW.quantity;
+END$$
+
+DELIMITER ;
+
+SHOW TRIGGERS
  -- drop table order_detail
  
 INSERT INTO product (name, price, stock_quantity, capacity, color) VALUES
@@ -142,7 +167,11 @@ INSERT INTO order_detail (order_id, product_id, quantity) VALUES
 drop table order_detail
 
 use phone_store;
+
 select * from product
+select * from customer
+select * from supplieres
+select * from supplieres_product
 select * from `order`
 select * from `order_detail` 
 show triggers

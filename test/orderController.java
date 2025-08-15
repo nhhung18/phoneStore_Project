@@ -1,28 +1,30 @@
 package com.vti.controller;
 
+
 import com.vti.dto.orderDto;
-import com.vti.dto.productDto;
 import com.vti.entity.order;
-import com.vti.entity.product;
 import com.vti.form.createOrderForm;
 import com.vti.form.updateOrderForm;
-import com.vti.service.IProductService;
-import com.vti.service.IorderService;
+import com.vti.service.IOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import org.springframework.data.domain.Pageable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
+
 
 @RestController
-@RequestMapping("order")
+@RequestMapping(value = "order")
 @CrossOrigin("*")
 public class orderController {
+
     @Autowired
-    private IorderService orderService;
+    private IOrderService orderService;
 
     @GetMapping()
     public ResponseEntity<?> getAllOrder(Pageable pageable) {
@@ -43,14 +45,15 @@ public class orderController {
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<?> updateOrderById(@PathVariable(name = "id") short id, @RequestBody updateOrderForm form) throws Exception{
+    public ResponseEntity<?> updateOrderById(@PathVariable(name = "id") short id, @RequestBody updateOrderForm form){
         orderService.updateOrderById(id, form);
+
         return new ResponseEntity<String>("Cap nhat thanh cong", HttpStatus.OK);
     }
 
     @PostMapping()
-    public ResponseEntity<?> createOrder(@RequestBody createOrderForm form) throws Exception{
+    public ResponseEntity<?> createOrder(@RequestBody createOrderForm form){
         orderService.createOrder(form);
-        return new ResponseEntity<String>("Tao don hang thanh cong", HttpStatus.OK);
+        return new ResponseEntity<String>("Tao san pham thanh cong", HttpStatus.OK);
     }
 }
