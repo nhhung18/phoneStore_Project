@@ -1,6 +1,7 @@
 package com.vti.dto;
 
 import java.util.Date;
+import com.vti.entity.role;
 
 public class customerDto {
     private short id;
@@ -10,12 +11,14 @@ public class customerDto {
     private String address;
     private int phoneNum;
     private Date createDate;
+    private String password;
+    private role role;
 
     public customerDto() {
         super();
     }
 
-    public customerDto(short id, String email, String username, String fullname, String address, int phoneNum, Date createDate) {
+    public customerDto(short id, String email, String username, String fullname, String address, int phoneNum, Date createDate, role role) {
         this.id = id;
         this.email = email;
         this.username = username;
@@ -23,6 +26,7 @@ public class customerDto {
         this.address = address;
         this.phoneNum = phoneNum;
         this.createDate = createDate;
+        this.role = role;
     }
 
     public short getId() {
@@ -65,11 +69,11 @@ public class customerDto {
         this.username = username;
     }
 
-    public int getPhoneNum() {
+    public int getPhone_num() {
         return phoneNum;
     }
 
-    public void setPhoneNum(int phoneNum) {
+    public void setPhone_num(int phoneNum) {
         this.phoneNum = phoneNum;
     }
 
@@ -79,5 +83,21 @@ public class customerDto {
 
     public void setCreateDate(Date createDate) {
         this.createDate = createDate;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public com.vti.entity.role getRole() {
+        return role;
+    }
+
+    public void setRole(com.vti.entity.role role) {
+        this.role = role;
     }
 }

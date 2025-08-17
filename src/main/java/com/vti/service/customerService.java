@@ -5,14 +5,23 @@ import com.vti.dto.productDto;
 import com.vti.entity.customer;
 import com.vti.entity.product;
 import com.vti.form.createCustomerForm;
+import com.vti.form.customerFormForRegister;
 import com.vti.form.updateCustomerForm;
 import com.vti.form.updateProductForm;
 import com.vti.repository.ICustomerRepository;
 import com.vti.repository.IProductRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.support.BeanDefinitionDsl;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -62,17 +71,63 @@ public class customerService implements ICustomerService {
 
     @Override
     public void createCustomer(createCustomerForm form) throws Exception{
-        if (form.getEmail() == null || form.getUsername() == null ||
-                form.getFullname() == null || form.getPhone_num() == null) {
-            throw new Exception("Thieu thong tin bat buoc");
+        if (customerRepository.existsByUsername(form.getUsername())) {
+            throw new Exception("Username đã tồn tại");
+        }if (customerRepository.existsByEmail(form.getEmail())) {
+            throw new Exception("Email đã tồn tại");
         }
+
         customer customer = new customer();
         customer.setEmail(form.getEmail());
         customer.setUsername(form.getUsername());
         customer.setFullname(form.getFullname());
         customer.setAddress(form.getAddress());
         customer.setPhone_num(form.getPhone_num());
+        customer.setPassword(new BCryptPasswordEncoder().encode(form.getPassword()));
+        if (form.getPhone_num() != null) customer.setRole(form.getRole());
         customerRepository.save(customer);
     };
 
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+
+        customer customer = customerRepository.findByUsername(username);
+
+        if (customer == null) {
+            throw new UsernameNotFoundException(username);
+        }
+
+        List<GrantedAuthority> authorities = AuthorityUtils.createAuthorityList("ROLE_" + customer.getRole());
+
+        return new org.springframework.security.core.userdetails.User(
+                customer.getUsername(),
+                customer.getPassword(),
+                authorities);
+    }
+
+    @Override
+    public customer getLoginByUsername(String username) {
+        return customerRepository.findByUsername(username);
+    }
+
+
+    @Override
+    public void registerCustomer(customerFormForRegister form) throws Exception{
+        if (customerRepository.existsByUsername(form.getUsername())) {
+            throw new Exception("Username đã tồn tại");
+        }if (customerRepository.existsByEmail(form.getEmail())) {
+            throw new Exception("Email đã tồn tại");
+        }
+
+        customer customer = new customer();
+        customer.setEmail(form.getEmail());
+        customer.setUsername(form.getUsername());
+        customer.setFullname(form.getFullname());
+        customer.setAddress(form.getAddress());
+        customer.setPhone_num(form.getPhone_num());
+        customer.setPassword(new BCryptPasswordEncoder().encode(form.getPassword()));
+        if (form.getPhone_num() != null) customer.setRole(form.getRole());
+
+        customerRepository.save(customer);
+    };
 }

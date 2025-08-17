@@ -68,11 +68,11 @@ public class product implements Serializable {
         this.price = price;
     }
 
-    public int getStockQuantity() {
+    public int getStock_quantity() {
         return stockQuantity;
     }
 
-    public void setStockQuantity(int stock_quantity) {
+    public void setStock_quantity(int stock_quantity) {
         this.stockQuantity = stock_quantity;
     }
 

@@ -32,6 +32,9 @@ public class customer implements Serializable {
     @Column(name = "phone_num", nullable = false, unique = true)
     private Integer phoneNum;
 
+    @Column(name = "password", length = 100, nullable = false)
+    private String password;
+
     @Column(name = "CreateDate")
     @Temporal(TemporalType.TIMESTAMP)
     @CreationTimestamp
@@ -40,6 +43,13 @@ public class customer implements Serializable {
     @OneToMany(mappedBy = "customer_id")
     List<order> orders;
 
+    @Column(name = "role")
+    @Enumerated(EnumType.STRING)
+    private role role = com.vti.entity.role.user;
+
+//    @Column(name = "status")
+//    @Enumerated(EnumType.STRING)
+//    private status status = com.vti.entity.status.not_active;
 
     public customer() {
         super();
@@ -99,5 +109,21 @@ public class customer implements Serializable {
 
     public void setCreateDate(Date createDate) {
         this.createDate = createDate;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public com.vti.entity.role getRole() {
+        return role;
+    }
+
+    public void setRole(com.vti.entity.role role) {
+        this.role = role;
     }
 }

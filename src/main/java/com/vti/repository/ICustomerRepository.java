@@ -8,4 +8,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 //        findById(ID id)
 
 public interface ICustomerRepository extends JpaRepository<customer, Short> {
+    public customer findByUsername(String username);
+
+    boolean existsByUsername(String username);
+
+    boolean existsByEmail(String email);
 }

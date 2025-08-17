@@ -13,6 +13,9 @@ create table customer(
 ALTER TABLE customer
 ADD `password` varchar(100) not null;
 
+alter table customer
+add `role` enum('admin', 'user');
+
 create table supplieres(
 	id tinyint unsigned auto_increment primary key,
     Email varchar(50) not null unique key,
@@ -103,7 +106,7 @@ END$$
 
 DELIMITER ;
 
-SHOW TRIGGERS
+SHOW TRIGGERS;
  -- drop table order_detail
  
 INSERT INTO product (name, price, stock_quantity, capacity, color) VALUES
@@ -122,6 +125,17 @@ INSERT INTO customer (Email, Username, FullName, address, phone_num) VALUES
 ('peter.phan@example.com', 'peterphan', 'Phan Quang', '789 Oak Blvd', 765432109),
 ('ronaldo7@example.com', 'cr7', 'Cirstiano Ronaldo', '678 OldTrafford Road', 0982262222),
 ('messi10@example.com', 'm10', 'Lionel Messi', '999 Nguyen Chi Thanh Road', 0372899999);
+
+INSERT INTO customer (Email, Username, FullName, address, phone_num, `password`, `role`) VALUES 
+('user3@example.com', 'user3', 'USER3', '103 Dang Xuan Bang ST', 09271735, '$2a$10$W2neF9.6Agi6kAKVq8q3fec5dHW8KUA.b0VSIGdIZyUravfLpyIFi', 'user')
+
+UPDATE customer
+SET password = '$2a$10$W2neF9.6Agi6kAKVq8q3fec5dHW8KUA.b0VSIGdIZyUravfLpyIFi'
+WHERE id = 2;
+
+update customer
+set `role` = 'user'
+where id = 2
 
 INSERT INTO supplieres (Email, `name`, address, phone_num) VALUES
 ('supplier1@example.com', 'Supplier One', '12 Tran Hung Dao, Ha Noi', 910000001),
@@ -175,25 +189,6 @@ select * from supplieres_product
 select * from `order`
 select * from `order_detail` 
 show triggers
-
-UPDATE order_detail AS odd
-JOIN `order` AS od 
-    ON od.id = odd.order_id
-SET odd.total_price = CASE 
-                   WHEN od.paying_status = 'failed' THEN NULL
-                   ELSE odd.price
-                END;
-
-
-                
-                
-UPDATE `order`
-SET price = CASE 
-                    WHEN paying_status = 'failed' THEN NULL 
-                    ELSE ship_status 
-                 END;
-                 
-
 
 
 

@@ -47,10 +47,16 @@ public class productService implements IProductService {
     ;
 
     @Override
+    public  productDto getProductByName(String name){
+        product entities = productRepository.findByNameContainingIgnoreCase(name);
+        productDto dto = mapper.map(entities, productDto.class);
+        return dto;
+    };
+
+    @Override
     public void deleteProductById(short id) {
         productRepository.deleteById(id);
     }
-
     ;
 
     @Override
@@ -58,7 +64,7 @@ public class productService implements IProductService {
         product product = productRepository.findById(id).orElseThrow(() -> new Exception("San pham khong ton tai"));
         if (form.getName() != null) product.setName(form.getName());
         if (form.getPrice() != null) product.setPrice(form.getPrice());
-        if (form.getStock_quantity() != null) product.setStockQuantity(form.getStock_quantity());
+        if (form.getStock_quantity() != null) product.setStock_quantity(form.getStock_quantity());
         if (form.getCapacity() != null) product.setCapacity(form.getCapacity());
         if (form.getColor() != null) product.setColor(form.getColor());
         productRepository.save(product);
@@ -73,7 +79,7 @@ public class productService implements IProductService {
         product product = new product();
         product.setName(form.getName());
         product.setPrice(form.getPrice());
-        product.setStockQuantity(form.getStock_quantity());
+        product.setStock_quantity(form.getStock_quantity());
         product.setCapacity(form.getCapacity());
         product.setColor(form.getColor());
 

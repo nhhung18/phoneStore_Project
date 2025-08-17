@@ -19,4 +19,6 @@ public interface IProductService {
     void updateProductById(short id, updateProductForm form) throws Exception;
 
     void createProduct(createProductForm form) throws Exception;
+
+    productDto getProductByName(String name);
 }

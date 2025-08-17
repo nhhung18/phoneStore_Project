@@ -1,17 +1,18 @@
 package com.vti.form;
 
+import com.vti.entity.customer;
 import com.vti.entity.role;
 
-public class createCustomerForm {
+public class customerFormForRegister {
     private String email;
     private String username;
     private String fullname;
     private String address;
     private Integer phone_num;
     private String password;
-    private role role = com.vti.entity.role.user;
+    private com.vti.entity.role role = com.vti.entity.role.user;
 
-    public createCustomerForm() {
+    public customerFormForRegister() {
         super();
     }
 
@@ -63,15 +64,7 @@ public class createCustomerForm {
         this.password = password;
     }
 
-    public com.vti.entity.role getRole() {
-        return role;
-    }
-
-    public void setRole(com.vti.entity.role role) {
-        this.role = role;
-    }
-
-    public createCustomerForm(String email, String username, String fullname, String address, Integer phone_num, String password) {
+    public customerFormForRegister(String email, String username, String fullname, String address, Integer phone_num, String password) {
         this.email = email;
         this.username = username;
         this.fullname = fullname;
@@ -80,4 +73,22 @@ public class createCustomerForm {
         this.password = password;
     }
 
+    public customer asCustomer(){
+        customer customer = new customer();
+        customer.setEmail(email);
+        customer.setUsername(username);
+        customer.setFullname(fullname);
+        customer.setAddress(address);
+        customer.setPhone_num(phone_num);
+        customer.setPassword(password);
+        return customer;
+    }
+
+    public com.vti.entity.role getRole() {
+        return role;
+    }
+
+    public void setRole(com.vti.entity.role role) {
+        this.role = role;
+    }
 }

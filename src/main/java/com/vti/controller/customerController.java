@@ -1,22 +1,13 @@
 package com.vti.controller;
 
-import com.vti.dto.customerDto;
-import com.vti.dto.productDto;
-import com.vti.entity.customer;
-import com.vti.form.createCustomerForm;
-import com.vti.form.createProductForm;
-import com.vti.form.updateCustomerForm;
-import com.vti.form.updateProductForm;
+import com.vti.form.*;
 import com.vti.service.ICustomerService;
-import com.vti.service.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
-import java.util.List;
+import org.springframework.security.access.prepost.PreAuthorize;
 
 @RestController
 @RequestMapping("customer")
@@ -27,16 +18,19 @@ public class customerController {
     private ICustomerService customerService;
 
     @GetMapping()
+    @PreAuthorize("hasAnyRole('admin','user')")
     public ResponseEntity<?> getAllCustomer(Pageable pageable) {
         return new ResponseEntity<>(customerService.getAllCustomer(pageable), HttpStatus.OK);
     }
 
     @GetMapping(value = "/{id}")
+    @PreAuthorize("hasRole('admin')")
     public ResponseEntity<?> getCustomerById(@PathVariable(name = "id") short id) {
         return new ResponseEntity<>(customerService.getCustomerById(id), HttpStatus.OK);
     }
 
     @DeleteMapping(value = "/{id}")
+    @PreAuthorize("hasRole('admin')")
     public ResponseEntity<?> deleteCustomerById(@PathVariable(name = "id") short id) {
         customerService.deleteCustomerById(id);
 
@@ -44,6 +38,7 @@ public class customerController {
     }
 
     @PutMapping(value = "/{id}")
+    @PreAuthorize("hasAnyRole('admin','user')")
     public ResponseEntity<?> updateProductById(@PathVariable(name = "id") short id, @RequestBody updateCustomerForm form) throws Exception{
         customerService.updateCustomerById(id, form);
 
@@ -51,9 +46,16 @@ public class customerController {
     }
 
     @PostMapping()
+    @PreAuthorize("hasRole('admin')")
     public ResponseEntity<?> createCustomerById(@RequestBody createCustomerForm form) throws Exception{
         customerService.createCustomer(form);
         return new ResponseEntity<String>("Tao khach hang thanh cong", HttpStatus.OK);
+    }
+
+    @PostMapping(value = "register")
+    public ResponseEntity<?> RegisterAccount(@RequestBody customerFormForRegister form) throws Exception {
+        customerService.registerCustomer(form);
+        return new ResponseEntity<>("Dang ky thanh cong", HttpStatus.OK);
     }
 
 }

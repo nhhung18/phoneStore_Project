@@ -9,5 +9,5 @@ import java.awt.print.Pageable;
 import java.util.List;
 
 public interface IProductRepository extends JpaRepository<product, Short> {
-
+    product findByNameContainingIgnoreCase(String name);
 }
