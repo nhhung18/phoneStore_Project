@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HN Store</title>
+    <link rel="icon" type="image/x-icon" href="/img/logo/icon.png" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <section id="header">
+      <a href="#"
+        ><img src="img/logo/hn_logo_crop_resize.png" class="logo" alt=""
+      /></a>
+
+      <div>
+        <ul id="navbar">
+          <li><a href="index.html">Trang chủ</a></li>
+          <li><a href="shop.html">Sản phẩm</a></li>
+          <li><a href="contact.html">Hỗ trợ</a></li>
+          <li class="active" id="lg-bag">
+            <a href="cart.html"><i class="bx bx-shopping-bag"></i></a>
+          </li>
+          <li>
+            <a href="login.html"
+              ><img src="img/logo/bxs-user-circle.svg" alt=""
+            /></a>
+          </li>
+          <a href="#" id="close"><i class="bx bx-x"></i></a>
+        </ul>
+      </div>
+      <div id="mobile">
+        <a href="cart.html"><i class="bx bx-shopping-bag"></i></a>
+        <i id="bar" class="bx bx-menu"></i>
+      </div>
+    </section>
+
+    <section id="page-header" class="about-header">
+      <h2>Mua ngay</h2>
+      <p>Không chỉ là mua sắm – đây là lựa chọn thông minh.</p>
+    </section>
+
+    <section id="cart" class="section-p1">
+      <table width="100%">
+        <thead>
+          <tr>
+            <td>Xóa</td>
+            <td>Hình ảnh</td>
+            <td>Sản phẩm</td>
+            <td>Giá</td>
+            <td>Số lượng</td>
+            <td>Tổng tiền</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><i class="bx bx-x-circle"></i></td>
+            <td><img src="./img/products/iphone-16-pro-max.webp" alt="" /></td>
+            <td>Iphone 16 Pro Max 256GB</td>
+            <td>29.990.000đ</td>
+            <td><input type="number" value="1" /></td>
+            <td>29.990.000đ</td>
+          </tr>
+          <tr>
+            <td><i class="bx bx-x-circle"></i></td>
+            <td><img src="./img/products/pk/iphone16_pk1.jpg" alt="" /></td>
+            <td>Ốp Lưng Trong Suốt MagSafe cho iPhone 16 Pro Max</td>
+            <td>1.403.000đ</td>
+            <td><input type="number" value="1" /></td>
+            <td>1.403.000đ</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="cart-add" class="section-p1">
+      <div id="coupon">
+        <h3>Mã giảm giá</h3>
+        <div>
+          <input type="text" placeholder="Nhập mã" />
+          <button class="normal">Áp dụng</button>
+        </div>
+      </div>
+
+      <div id="subtotal">
+        <h3>Tổng tiền giỏ hàng</h3>
+        <table>
+          <tr>
+            <td>Tổng cộng</td>
+            <td>31.393.000đ</td>
+          </tr>
+          <tr>
+            <td>Vận chuyển</td>
+            <td>Miễn phí</td>
+          </tr>
+          <tr>
+            <td><strong>Tổng cộng</strong></td>
+            <td><strong>31.393.000đ</strong></td>
+          </tr>
+        </table>
+        <button class="normal">Thanh toán</button>
+      </div>
+    </section>
+
+    <footer class="section-p1">
+      <div class="col">
+        <img class="logo" src="./img/logo/hn_logo_crop_resize.png" alt="" />
+        <h4>Liên hệ</h4>
+        <p>
+          <strong>Địa chỉ:</strong> ĐH Thăng Long, Nghiêm Xuân Yêm, Hoàng Mai,
+          Hà Nội
+        </p>
+        <p>
+          <strong>Số điện thoại:</strong> +01 2222 345 / (+91) 0 123 456 789
+        </p>
+        <p><strong>Thời gian làm việc:</strong> 9:00 - 18:00, Mon - Sun</p>
+        <div class="follow">
+          <h4>Theo dõi chúng tôi</h4>
+          <div class="icon">
+            <i class="bx bxl-facebook"></i>
+            <i class="bx bxl-twitter"></i>
+            <i class="bx bxl-instagram"></i>
+            <i class="bx bxl-pinterest-alt"></i>
+            <i class="bx bxl-youtube"></i>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chế độ quản lý</title>
+    <link rel="shortcut icon" href="./img/logo/icon.png" type="image/x-icon" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="./admin.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <div class="logo">
+          <a href="index.html"
+            ><img src="img/logo/hn_logo_crop_resize.png" alt=""
+          /></a>
+        </div>
+        <ul class="menu">
+          <li>
+            <a href="#" class="active" onclick="showSection('dashboard')"
+              ><i class="bi bi-shop"></i> Tổng quan</a
+            >
+          </li>
+          <li>
+            <a href="#" onclick="showSection('supplier')"
+              ><i class="bi bi-box-seam"></i> <span> Nhà cung cấp</span></a
+            >
+          </li>
+          <li>
+            <a href="#" onclick="showSection('products')"
+              ><i class="bi bi-phone"></i><span> Sản phẩm</span></a
+            >
+          </li>
+          <li>
+            <a href="#" onclick="showSection('orders')"
+              ><i class="bi bi-cart"></i><span> Đơn hàng</span></a
+            >
+          </li>
+          <li>
+            <a href="#" onclick="showSection('customers')"
+              ><i class="bi bi-people-fill"></i> <span> Khách hàng</span></a
+            >
+          </li>
+        </ul>
+      </div>
+
+      <div class="main">
+        <!-- Dashboard -->
+        <div id="dashboard" class="content-section active">
+          <div class="header">
+            <h2>Tổng quan cửa hàng</h2>
+          </div>
+
+          <div class="stats">
+            <div class="stat-card">
+              <div class="stat-number">125.5M</div>
+              <div>Doanh thu (VNĐ)</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-number">1,247</div>
+              <div>Đơn hàng</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-number">856</div>
+              <div>Sản phẩm</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-number">2,341</div>
+              <div>Khách hàng</div>
+            </div>
+          </div>
+
+          <div class="table-section">
+            <h3>Đơn hàng mới nhất</h3>
+            <table>
+              <thead>
+                <tr>
+                  <th>Mã đơn</th>
+                  <th>Khách hàng</th>
+                  <th>Tổng tiền</th>
+                  <th>Trạng thái</th>
+                  <th>Thao tác</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>#001</td>
+                  <td>Nguyễn Văn A</td>
+                  <td>2,500,000đ</td>
+                  <td><span class="status success">Đã giao</span></td>
+                  <td>
+                    <button class="btn btn-primary">Xem</button>
+                    <button class="btn btn-success">Sửa</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>#002</td>
+                  <td>Trần Thị B</td>
+                  <td>850,000đ</td>
+                  <td><span class="status warning">Đang xử lý</span></td>
+                  <td>
+                    <button class="btn btn-primary">Xem</button>
+                    <button class="btn btn-success">Sửa</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>#003</td>
+                  <td>Lê Văn C</td>
+                  <td>1,200,000đ</td>
+                  <td><span class="status danger">Hủy</span></td>
+                  <td>
+                    <button class="btn btn-primary">Xem</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div id="supplier" class="content-section">
+          <div class="header">
+            <h2>Quản lý nhà cung cấp</h2>
+            <br />
+            <button class="btn btn-primary">+ Thêm sản phẩm</button>
+          </div>
+        </div>
+
+        <!-- Products -->
+        <div id="products" class="content-section">
+          <div class="header">
+            <h2>Quản lý sản phẩm</h2>
+            <br />
+            <button id="newBtnProduct" class="btn btn-primary">
+              + Thêm sản phẩm
+            </button>
+          </div>
+
+          <div class="table-section">
+            <table>
+              <thead>
+                <tr>
+                  <th>Mã sản phẩm</th>
+                  <th>Tên sản phẩm</th>
+                  <th>Giá (VNĐ)</th>
+                  <th>Tồn kho</th>
+                  <th>Dung lượng</th>
+                  <th>Màu</th>
+                  <th>Thao tác</th>
+                </tr>
+              </thead>
+              <tbody id="resultAllProduct">
+                <!-- <tr> -->
+                <!-- <td>iPhone 15 Pro</td>
+                  <td>Điện tử</td>
+                  <td>25,000,000đ</td>
+                  <td>15</td> -->
+                <!-- <td><span class="status success">Còn hàng</span></td> -->
+                <!-- <td>
+                    <button class="btn btn-primary">Xem</button>
+                    <button class="btn btn-success">Sửa</button>
+                    <button class="btn btn-danger">Xóa</button>
+                  </td>
+                </tr> -->
+                <!-- <tr>
+                  <td>MacBook Air M2</td>
+                  <td>Điện tử</td>
+                  <td>28,000,000đ</td>
+                  <td>8</td>
+                  <td><span class="status success">Còn hàng</span></td>
+                  <td>
+                    <button class="btn btn-primary">Xem</button>
+                    <button class="btn btn-success">Sửa</button>
+                    <button class="btn btn-danger">Xóa</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Áo thun nam</td>
+                  <td>Thời trang</td>
+                  <td>299,000đ</td>
+                  <td>0</td>
+                  <td><span class="status danger">Hết hàng</span></td>
+                  <td>
+                    <button class="btn btn-primary">Xem</button>
+                    <button class="btn btn-success">Sửa</button>
+                    <button class="btn btn-danger">Xóa</button>
+                  </td>
+                </tr> -->
+              </tbody>
+            </table>
+            <br />
+            <ul id="pagination" class="pagination"></ul>
+          </div>
+        </div>
+
+        <!-- Orders -->
+        <div id="orders" class="content-section">
+          <div class="header">
+            <h2>Quản lý đơn hàng</h2>
+          </div>
+
+          <div class="table-section">
+            <table>
+              <thead>
+                <tr>
+                  <th>Mã đơn</th>
+                  <th>Khách hàng</th>
+                  <th>Tổng tiền</th>
+                  <th>Trạng thái</th>
+                  <th>Ngày đặt</th>
+                  <th>Thao tác</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>#001</td>
+                  <td>Nguyễn Văn A</td>
+                  <td>2,500,000đ</td>
+                  <td><span class="status success">Đã giao</span></td>
+                  <td>12/08/2024</td>
+                  <td>
+                    <button class="btn btn-primary">Chi tiết</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>#002</td>
+                  <td>Trần Thị B</td>
+                  <td>850,000đ</td>
+                  <td><span class="status warning">Đang xử lý</span></td>
+                  <td>12/08/2024</td>
+                  <td>
+                    <button class="btn btn-primary">Chi tiết</button>
+                    <button class="btn btn-success">Xác nhận</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>#003</td>
+                  <td>Lê Văn C</td>
+                  <td>1,200,000đ</td>
+                  <td><span class="status warning">Đang giao</span></td>
+                  <td>11/08/2024</td>
+                  <td>
+                    <button class="btn btn-primary">Chi tiết</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Customers -->
+        <div id="customers" class="content-section">
+          <div class="header">
+            <h2>Quản lý khách hàng</h2>
+            <button class="btn btn-primary">+ Thêm khách hàng</button>
+          </div>
+
+          <div class="table-section">
+            <table>
+              <thead>
+                <tr>
+                  <th>Tên</th>
+                  <th>Email</th>
+                  <th>Số đơn hàng</th>
+                  <th>Tổng chi tiêu</th>
+                  <th>Ngày tham gia</th>
+                  <th>Thao tác</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Nguyễn Văn A</td>
+                  <td>nguyenvana@email.com</td>
+                  <td>5</td>
+                  <td>12,500,000đ</td>
+                  <td>15/01/2024</td>
+                  <td>
+                    <button class="btn btn-primary">Xem</button>
+                    <button class="btn btn-success">Sửa</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Trần Thị B</td>
+                  <td>tranthib@email.com</td>
+                  <td>3</td>
+                  <td>3,200,000đ</td>
+                  <td>20/02/2024</td>
+                  <td>
+                    <button class="btn btn-primary">Xem</button>
+                    <button class="btn btn-success">Sửa</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Lê Văn C</td>
+                  <td>levanc@email.com</td>
+                  <td>8</td>
+                  <td>18,900,000đ</td>
+                  <td>10/03/2024</td>
+                  <td>
+                    <button class="btn btn-primary">Xem</button>
+                    <button class="btn btn-success">Sửa</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- POPUP EDIT -->
+    <div id="modalOverlay" class="overlay" style="display: none">
+      <div class="modal">
+        <h3>Sửa sản phẩm</h3>
+        <label>Tên: <input type="text" id="name" /></label><br />
+        <label>Giá: <input type="number" id="price" /></label><br />
+        <label>Tồn kho: <input type="number" id="stock" /></label><br />
+        <label
+          >Dung lượng:
+          <div class="form-group">
+            <select id="capacity">
+              <option value="GB128">128GB</option>
+              <option value="GB256">256GB</option>
+              <option value="GB512">512GB</option>
+              <option value="TB1">1TB</option>
+            </select>
+          </div>
+        </label>
+        <br />
+        <label
+          >Màu
+          <div class="form-group">
+            <select id="color">
+              <option value="white">white</option>
+              <option value="black">black</option>
+              <option value="blue">blue</option>
+              <option value="yellow">yellow</option>
+            </select>
+          </div> </label
+        ><br />
+        <button id="saveBtn">Lưu</button>
+        <button id="cancelBtn">Hủy</button>
+      </div>
+    </div>
+
+    <div id="modalNewOverlay" class="overlay" style="display: none">
+      <div class="modal">
+        <h3>Tạo sản phẩm mới</h3>
+        <label>Tên: <input type="text" id="nameNew" /></label><br />
+        <label>Giá: <input type="number" id="priceNew" /></label><br />
+        <label>Tồn kho: <input type="number" id="stockNew" /></label><br />
+        <label
+          >Dung lượng:
+          <div class="form-group">
+            <select id="capacityNew">
+              <option value="null">-- Chọn dung lượng --</option>
+              <option value="GB128">128GB</option>
+              <option value="GB256">256GB</option>
+              <option value="GB512">512GB</option>
+              <option value="TB1">1TB</option>
+            </select>
+          </div>
+        </label>
+        <br />
+        <label
+          >Màu
+          <div class="form-group">
+            <select id="colorNew">
+              <option value="null">-- Chọn màu --</option>
+              <option value="white">white</option>
+              <option value="black">black</option>
+              <option value="blue">blue</option>
+              <option value="yellow">yellow</option>
+            </select>
+          </div> </label
+        ><br />
+        <button id="createBtn">Tạo</button>
+        <button id="cancelNewBtn">Hủy</button>
+      </div>
+    </div>
+
+    <script src="admin.js"></script>
+  </body>
+</html>
